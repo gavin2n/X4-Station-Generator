@@ -1,0 +1,30 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosstate
+
+# Visual Studio cache/options
+.vs/
+
+# Test results
+TestResults/
+
+# Build logs
+*.log
+build_log*.txt
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Generated test files
+test*.xml
+generated_plan*.xml
