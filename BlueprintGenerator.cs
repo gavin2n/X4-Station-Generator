@@ -25,52 +25,48 @@ namespace X4StationBlueprintGen
 
             int entryIndex = 1;
             
-            // Simple grid layout
-            int x = 0;
-            int y = 0;
-            int z = 0;
-            int spacing = 5000; // 5km spacing
-            int rowLimit = 10;
-            int counter = 0;
+            var grid = new GridManager();
+            
+            // Add Root Connector explicitly first
+            var root = new XElement("entry", new XAttribute("index", entryIndex), new XAttribute("macro", "structures_arg_connector_cross_01_macro"));
+            var rootOffset = new XElement("offset");
+            rootOffset.Add(new XElement("position", new XAttribute("x", 0), new XAttribute("y", 0), new XAttribute("z", 0)));
+            root.Add(rootOffset);
+            plan.Add(root);
+            entryIndex++;
 
-            // Helper to add entry
+            // Helper to add entry via GridManager
             void AddEntry(string macroName) {
-                // <entry index="1" macro="macro_name">
-                var entry = new XElement("entry", new XAttribute("index", entryIndex), new XAttribute("macro", macroName));
+                var placements = grid.AddModule(macroName);
                 
-                // <offset> wrapper required
-                var offset = new XElement("offset");
-
-                // <position x="0" y="0" z="0" />
-                offset.Add(new XElement("position", 
-                    new XAttribute("x", x), 
-                    new XAttribute("y", y), 
-                    new XAttribute("z", z)
-                ));
-                
-                // <rotation yaw="0" pitch="0" roll="0" />
-                // Only add if non-zero to match game files
-                if (x != 0 || y != 0 || z != 0)
+                foreach(var p in placements)
                 {
-                    offset.Add(new XElement("rotation", 
-                        new XAttribute("yaw", 0), 
-                        new XAttribute("pitch", 0), 
-                        new XAttribute("roll", 0)
+                    // <entry index="1" macro="macro_name">
+                    var entry = new XElement("entry", new XAttribute("index", entryIndex), new XAttribute("macro", p.Macro));
+                    
+                    // <offset> wrapper
+                    var offset = new XElement("offset");
+
+                    // <position x="0" y="0" z="0" />
+                    offset.Add(new XElement("position", 
+                        new XAttribute("x", p.X), 
+                        new XAttribute("y", p.Y), 
+                        new XAttribute("z", p.Z)
                     ));
-                }
+                    
+                    // <rotation yaw="0" pitch="0" roll="0" />
+                    if (p.X != 0 || p.Y != 0 || p.Z != 0)
+                    {
+                        offset.Add(new XElement("rotation", 
+                            new XAttribute("yaw", p.Yaw), 
+                            new XAttribute("pitch", 0), 
+                            new XAttribute("roll", 0)
+                        ));
+                    }
 
-                entry.Add(offset);
-                plan.Add(entry);
-                entryIndex++;
-
-                // Grid updates
-                x += spacing;
-                counter++;
-                if (counter >= rowLimit)
-                {
-                    x = 0;
-                    z += spacing;
-                    counter = 0;
+                    entry.Add(offset);
+                    plan.Add(entry);
+                    entryIndex++;
                 }
             };
 

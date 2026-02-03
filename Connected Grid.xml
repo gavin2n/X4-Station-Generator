@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plans>
+  <plan id="connected_grid" name="Connected Grid" description="">
+    <entry index="1" macro="structures_arg_connector_cross_01_macro">
+      <offset>
+        <position x="0" y="0" z="0" />
+      </offset>
+    </entry>
+    <entry index="2" macro="dockarea_arg_m_02_tradestation_01_macro">
+      <offset>
+        <position x="21000" y="0" z="0" />
+        <rotation yaw="0" pitch="0" roll="0" />
+      </offset>
+    </entry>
+    <entry index="3" macro="prod_gen_hullparts_macro">
+      <offset>
+        <position x="22000" y="0" z="0" />
+        <rotation yaw="0" pitch="0" roll="0" />
+      </offset>
+    </entry>
+    <entry index="4" macro="prod_gen_hullparts_macro">
+      <offset>
+        <position x="23000" y="0" z="0" />
+        <rotation yaw="0" pitch="0" roll="0" />
+      </offset>
+    </entry>
+    <entry index="5" macro="prod_gen_hullparts_macro">
+      <offset>
+        <position x="24000" y="0" z="0" />
+        <rotation yaw="0" pitch="0" roll="0" />
+      </offset>
+    </entry>
+    <entry index="6" macro="prod_gen_hullparts_macro">
+      <offset>
+        <position x="25000" y="0" z="0" />
+        <rotation yaw="0" pitch="0" roll="0" />
+      </offset>
+    </entry>
+  </plan>
+</plans>
